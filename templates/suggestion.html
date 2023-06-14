@@ -43,13 +43,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="createLabel">新增使用者</h1>
+        <h1 class="modal-title fs-5" id="createLabel">新增建議</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="/createuser" method="post" onsubmit="return CheckSubmit();">
+      <form action="/createsug" method="post" onsubmit="return CheckSubmit();">
       <div class="modal-body">
         <label class="form-label" for="form2Example11">使用者名稱</label>
-        <input id="username" class="form-control" name="username" />
+        <input id="sugname" class="form-control" name="sugname" />
+        <label class="form-label" for="form2Example11">您的建議</label>
+        <input id="suggestion" class="form-control" name="suggestion" />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -59,17 +61,6 @@
     </div>
   </div>
 </div>
-  {% if type %}
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-      Swal.fire({
-      icon: 'error',
-      title: '{{type}}',
-      text: '此帳號已註冊',
-      footer: '<a href="">Why do I have this issue?</a>'
-      })
-  </script>
-  {% endif %}
 {% endblock modal %}
 
   {% with messages = get_flashed_messages() %}

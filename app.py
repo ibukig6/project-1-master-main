@@ -97,15 +97,32 @@ def users():
         cur.close()
     return render_template("users.html",data = data)
 
-@app.route("/suggestion")
-def suggestion():
+@app.route("/createsug",methods=["POST"])
+def createsug():
+    name = request.form.get("sugname")
+    account = request.form.get("suggestion")
     with get_db() as cur: #with get_db().cursor() as cur:
         cur.row_factory = sql.Row
         cur = cur.cursor() #上面的註解可以把這行省略
-        cur.execute("select * from suggestion")
-        data = cur.fetchall()
+        cur.execute("INSERT INTO Suggestion (s_name, s_sug) VALUES ('{name}','{suggestion}');")
         cur.close()
-    return render_template("suggestion.html",data = data)
+    flash('新增成功')
+    return redirect(url_for('users'))
+
+@app.route("/createsug",methods=["POST"])
+def createsug():
+    name = request.form.get("username")   #沒有亮黃光
+    if name =="":name = "User"
+    account = request.form.get("account")
+    password = request.form.get("password")
+    password = sha256(password)
+    with get_db() as cur: #with get_db().cursor() as cur:
+        cur.row_factory = sql.Row
+        cur = cur.cursor() #上面的註解可以把這行省略
+        cur.execute(f"INSERT INTO Users (name, account, password) VALUES ('{name}','{account}');")
+        cur.close()
+    flash('新增成功')
+    return redirect(url_for('users'))
 
 @app.route("/createuser",methods=["POST"])
 def createuser():
