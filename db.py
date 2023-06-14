@@ -9,7 +9,7 @@ print ("Opened database successfully")
 #conn.execute('CREATE TABLE Pictures (id integer primary key autoincrement, p_name nvarchar(20), p_order integer)')
 #print ("Table created successfully")
 
-conn.execute('CREATE TABLE Suggestion (id integer primary key autoincrement, s_name nvarchar(20), s_sug integer)')
+conn.execute('CREATE TABLE Suggestion (id integer primary key autoincrement, s_name nvarchar(20), s_sug)')
 print ("Table created successfully")
 
 conn.close()

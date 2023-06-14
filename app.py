@@ -97,6 +97,16 @@ def users():
         cur.close()
     return render_template("users.html",data = data)
 
+@app.route("/suggestion")
+def suggestion():
+    with get_db() as cur: #with get_db().cursor() as cur:
+        cur.row_factory = sql.Row
+        cur = cur.cursor() #上面的註解可以把這行省略
+        cur.execute("select * from suggestion")
+        data = cur.fetchall()
+        cur.close()
+    return render_template("suggestion.html",data = data)
+
 @app.route("/createuser",methods=["POST"])
 def createuser():
     account = request.form.get("account")

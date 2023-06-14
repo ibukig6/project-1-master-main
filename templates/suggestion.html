@@ -1,0 +1,83 @@
+{% extends "layout/back.html"%}
+{%block main %}
+<h1 class="mt-4">在此處留言，讓我們的網站更符合您的期待</h1>
+<table class="table" style="width: 1200px;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">名字</th>
+        <th scope="col">帳號</th>
+        <th scope="col">對此網站的意見</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for i in range(data|length) %}
+        <tr>
+            <th scope="row">{{ i+1 }}</th>
+            <td>{{ data[i].name }}</td>
+            <td>{{ data[i].account }}</td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <a type="button" class="btn btn-outline-success mx-4" href="/edit/{{ data[i].id }}">修改</a>
+                </div>
+                <div class="col">
+                  <form action="/deleteuser/{{ data[i].id }}" method="post">
+                    <button class="btn btn-outline-danger" onclick="if(confirm('您確定要刪除嗎？')) return true;else return false">刪除</button>
+                  </form>
+              </div>
+              </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#create" style="right: 200px;position: absolute;">
+  新增
+</button>
+{% block modal %}
+<!-- Modal -->
+<div class="modal fade modal-lg" id="create" tabindex="-1" aria-labelledby="createLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createLabel">新增使用者</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/createuser" method="post" onsubmit="return CheckSubmit();">
+      <div class="modal-body">
+        <label class="form-label" for="form2Example11">使用者名稱</label>
+        <input id="username" class="form-control" name="username" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">儲存</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+  {% if type %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      Swal.fire({
+      icon: 'error',
+      title: '{{type}}',
+      text: '此帳號已註冊',
+      footer: '<a href="">Why do I have this issue?</a>'
+      })
+  </script>
+  {% endif %}
+{% endblock modal %}
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+          <script>Success('{{message}}')</script>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+{% endblock %}
