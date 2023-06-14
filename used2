@@ -1,0 +1,4 @@
+先到flask的quickstart複製第一組程式代碼，並在下面打
+if __name__ =="__main__":
+    app.run(debug=True)
+

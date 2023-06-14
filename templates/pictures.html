@@ -1,0 +1,57 @@
+{% extends "layout/back.html"%}
+{%block main %}
+<h1 class="mt-4">管理輪播圖片</h1>
+<table class="table" style="width: 1500px;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">id</th>
+        <th scope="col" style="width: 500px;">圖片</th>
+        <th scope="col" style="width: 250px;">順序</th>
+        <th scope="col">功能</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for i in range(data|length) %}
+        <form action="/MP" method="post">
+        <tr>
+            <th scope="row">{{ i+1 }}</th>
+            <td>{{ data[i].id }}<input type="hidden" name="id" value="{{ data[i].id }}"></td>
+            <td><img src="/static/images2/{{ data[i].p_name }}" class="d-block w-100" alt="..."><input type="hidden" name="p_name" value="{{ data[i].p_name }}"></td>
+            <td>
+                <select name="p_order" class="form-select" aria-label="Default select example">
+                    {% for j in range(1,len+1) %}
+                        {% if j == data[i].p_order %}
+                            <option selected value="{{ j }}">{{ j }}</option>
+                        {% else %}
+                            <option value="{{ j }}">{{ j }}</option>
+                        {% endif %}
+                    {% endfor %}
+                  </select>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <input type="submit" name="fun" class="btn btn-outline-success mx-4" value="修改">
+                </div>
+                <div class="col">
+                    <input type="submit" name="fun" value="刪除" class="btn btn-outline-danger" onclick="if(confirm('您確定要刪除嗎？')) return true;else return false">
+              </div>
+              </div>
+            </td>
+        </tr>
+    </form>
+        {% endfor %}
+    </tbody>
+  </table>
+
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+          <script>Success('{{message}}')</script>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+{% endblock %}

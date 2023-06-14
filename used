@@ -1,0 +1,29 @@
+先進bootstrat，點docs，複製第一行程式並貼到vs code上
+<img src="放圖片"style="設置圖片參數">
+<a href="放要連結的路徑"></a>
+<br>是換行
+回bootstrat首頁，往下滑，複製CND底下的程式
+第一個複製到</head>的上一行
+第二個複製到<body>的下一行
+
+在bootstrat的docs介面裡，旁邊尋找navbar 複製看到的第一個程式並複製到vs code的body下面
+先建立
+<div class="row" style="">
+    <div class="col">
+        在bootstrat的docs介面裡，旁邊尋找card 複製看到的第一個程式並複製到這裡
+    </div>
+    <div class="col">
+        在bootstrat的docs介面裡，旁邊尋找card 複製看到的第一個程式並複製到這裡
+    </div>
+</div>
+
+#alt+shift+F 自動排版
+
+將標題設為置中:
+
+
+將按鈕設為置中:
+先建立一個
+<div>
+    把按鈕給放在這
+</div>

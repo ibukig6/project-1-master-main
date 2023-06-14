@@ -1,0 +1,24 @@
+{% extends "layout/back.html"%}
+{% block main%}
+<h1 class="mt-4">輪播圖片新增</h1>
+<div class="mt-4">
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="提交">
+    </form>
+</div>
+{% if type == "新增成功" %}
+<script>
+    Success("{{type}}", "新增成功");
+</script>
+{% elif type == "副檔名不符" %}
+<script>
+    Swal.fire({
+    icon: 'error',
+    title: '{{type}}',
+    text: '{{type}}',
+    })
+</script>
+
+{% endif %}
+{% endblock main%}
