@@ -2,7 +2,7 @@
 {% block content%}
 
 <div class="container">
-<div id="carouselExampleIndicators" class="carousel slide">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" interval: 2000>
     <div class="carousel-indicators">
         {% for i in range(data|length) %}
         {% if i == 0 %}
