@@ -7,8 +7,8 @@ function Success(type,text='You clicked the button!'){
 }
 
 function CheckSubmit(){
-    let account = document.getElementById("form2Example11").value.length;
-    let password = document.getElementById("form2Example22").value.length;
+    let account = document.getElementById("account").value.length;
+    let password = document.getElementById("password").value.length;
     if (account == 0 && password == 0 ){
       alert("請輸入資料");
       return false
