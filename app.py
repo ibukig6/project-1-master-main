@@ -135,6 +135,31 @@ def createuser():
     return redirect(url_for('users'))
     return render_template("users.html",data = data)                                               ###所以這行能刪掉嗎?###
 
+
+
+
+
+
+
+
+
+@app.route("/createsug",methods=["POST"])
+def createsug():
+    name = request.form.get("sugname")   #沒有亮黃光
+    s_sug = request.form.get("suggestion")
+    with get_db() as cur: #with get_db().cursor() as cur:
+        cur.row_factory = sql.Row
+        cur = cur.cursor() #上面的註解可以把這行省略
+        cur.execute(f"INSERT INTO Suggestion (s_name, s_sug) VALUES ('{name}','{s_sug}');")
+        cur.close()
+    flash('新增成功')
+    return redirect(url_for('suggestion'))
+
+
+
+
+
+
 @app.route("/edit/<int:id>",methods=["GET","POST"])
 def edit(id):
     if request.method =="POST":
