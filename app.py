@@ -108,7 +108,7 @@ def createsug():
         cur.close()
     flash('新增成功')
     return redirect(url_for('users'))
-
+'''
 @app.route("/createsug",methods=["POST"])
 def createsug():
     name = request.form.get("username")   #沒有亮黃光
@@ -123,7 +123,7 @@ def createsug():
         cur.close()
     flash('新增成功')
     return redirect(url_for('users'))
-
+'''
 @app.route("/createuser",methods=["POST"])
 def createuser():
     account = request.form.get("account")
