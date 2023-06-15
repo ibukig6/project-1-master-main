@@ -97,33 +97,16 @@ def users():
         cur.close()
     return render_template("users.html",data = data)
 
-@app.route("/createsug",methods=["POST"])
-def createsug():
-    name = request.form.get("sugname")
-    account = request.form.get("suggestion")
+@app.route("/suggestion")
+def suggestion():
     with get_db() as cur: #with get_db().cursor() as cur:
         cur.row_factory = sql.Row
         cur = cur.cursor() #上面的註解可以把這行省略
-        cur.execute("INSERT INTO Suggestion (s_name, s_sug) VALUES ('{name}','{suggestion}');")
+        cur.execute("select * from Suggestion")
+        data = cur.fetchall()
         cur.close()
-    flash('新增成功')
-    return redirect(url_for('users'))
-'''
-@app.route("/createsug",methods=["POST"])
-def createsug():
-    name = request.form.get("username")   #沒有亮黃光
-    if name =="":name = "User"
-    account = request.form.get("account")
-    password = request.form.get("password")
-    password = sha256(password)
-    with get_db() as cur: #with get_db().cursor() as cur:
-        cur.row_factory = sql.Row
-        cur = cur.cursor() #上面的註解可以把這行省略
-        cur.execute(f"INSERT INTO Users (name, account, password) VALUES ('{name}','{account}');")
-        cur.close()
-    flash('新增成功')
-    return redirect(url_for('users'))
-'''
+    return render_template("suggestion.html",data = data)
+
 @app.route("/createuser",methods=["POST"])
 def createuser():
     account = request.form.get("account")
@@ -187,6 +170,18 @@ def deleteuser(id):
     flash('刪除成功')
     return redirect(url_for('users'))
     #return render_template("users.html",data=data)
+
+@app.route("/deletesug/<int:id>",methods=["POST"])
+def deletesug(id):
+    with get_db() as cur: #with get_db().cursor() as cur:
+        cur.row_factory = sql.Row
+        cur = cur.cursor() #上面的註解可以把這行省略
+        cur.execute(f"DELETE FROM Suggestion where id={id}")
+        #cur.execute("select * from Users")
+        #data = cur.fetchall()
+        cur.close()
+    flash('刪除成功')
+    return redirect(url_for('suggestion'))
 
 @app.route("/upload",methods=["GET","POST"])
 def upload():
